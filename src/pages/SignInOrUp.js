@@ -28,7 +28,6 @@ class SignInOrUp extends React.Component {
                 if (this._isMounted) this.setState({ loading: false });
                 alert(error);
             });
-
     }
 
     componentDidMount = () => {
@@ -45,7 +44,7 @@ class SignInOrUp extends React.Component {
                 <div className="mx-auto" style={{ width: 400, background: '#eee', padding: 20, marginTop: 60 }}>
                     <p style={{ textAlign: 'center' }}>サインイン</p>
                     <Formik
-                        initialValues={{ email: '', password: '' }}
+                        initialValues={{ email: '', password: ''}}
                         onSubmit={(values) => this.handleOnSubmit(values)}
                         validationSchema={Yup.object().shape({
                             email: Yup.string().email().required(),

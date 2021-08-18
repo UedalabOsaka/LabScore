@@ -58,7 +58,7 @@ class SignUp extends React.Component {
                             ({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
                                 <Form onSubmit={handleSubmit}>
                                     <FormGroup>
-                                        <Label for="name">Email</Label>
+                                        <Label for="email">Email</Label>
                                         <Input
                                             type="email"
                                             name="email"
