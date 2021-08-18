@@ -1,8 +1,7 @@
 import './ExploreContainer.css';
 
-interface ContainerProps { }
 
-const ExploreContainer: React.FC<ContainerProps> = () => {
+function MainC(){
   return (
     <div className="container">
       <strong>Ready to create an app?</strong>
@@ -11,4 +10,4 @@ const ExploreContainer: React.FC<ContainerProps> = () => {
   );
 };
 
-export default ExploreContainer;
+export default MainC;
