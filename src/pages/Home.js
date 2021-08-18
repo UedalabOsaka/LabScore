@@ -11,9 +11,10 @@ class Home extends React.Component {
     }
 
     render() {
+        const username=firebase.auth().currentUser.displayName;
         return (
             <div className="container">
-                <p>Home</p>
+                <p>Welcome {username}</p>
                 <br />
                 <br />
                 <Button onClick={this.handleLogout}>ログアウト</Button>

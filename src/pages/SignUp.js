@@ -21,10 +21,17 @@ class SignUp extends React.Component {
         firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
             .then(res => {
                 //正常終了時
-                //spinner表示終了
-                if (this._isMounted) this.setState({ loading: false });
-                //Homeに移動
-                this.props.history.push("/"); //history.pushを使うためwithRouterしている
+                //ついでに名前を設定（これ、登録と一緒にできないのかなあ）
+                firebase.auth().currentUser.updateProfile({
+                    displayName:values.username
+                  }).then(() => {
+                    if (this._isMounted) this.setState({ loading: false });//spinner表示終了
+                    //Homeに移動
+                    this.props.history.push("/"); //history.pushを使うためwithRouterしている
+                  }).catch((error) => {
+                    if (this._isMounted) this.setState({ loading: false });
+                    alert(error);
+                  });  
             })
             .catch(error => {
                 //異常終了時
@@ -72,6 +79,23 @@ class SignUp extends React.Component {
                                             {errors.email}
                                         </FormFeedback>
                                     </FormGroup>
+
+                                    <FormGroup>
+                                        <Label for="username">Username</Label>
+                                        <Input
+                                            type="username"
+                                            name="username"
+                                            id="username"
+                                            value={values.username}
+                                            onChange={handleChange}
+                                            onBlur={handleBlur}
+                                            invalid={touched.username && errors.username ? true : false}
+                                        />
+                                        <FormFeedback>
+                                            {errors.username}
+                                        </FormFeedback>
+                                    </FormGroup>
+
                                     <FormGroup>
                                         <Label for="password">Password</Label>
                                         <Input

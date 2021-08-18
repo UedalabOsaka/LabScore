@@ -24,7 +24,7 @@ import '@ionic/react/css/display.css';
 import { BrowserRouter as Router, Switch, } from 'react-router-dom';
 //screens
 import Home from './pages/Home';
-import Profile from './pages/Profile';
+//import Profile from './pages/Profile';
 import SignInOrUp from './pages/SignInOrUp';
 import SignUp from './pages/SignUp';
 
@@ -41,7 +41,7 @@ class App extends React.Component {
                     <Auth>
                         <Switch>
                             <Route exact path="/" component={Home} />
-                            <Route exact path="/profile" component={Profile} />
+                            {/*<Route exact path="/profile" component={Profile} />*/}
                             <Route render={() => <p>not found.</p>} />
                         </Switch>
                     </Auth>
