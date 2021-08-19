@@ -1,12 +1,12 @@
 
 import React from 'react';
-import { Redirect, Route } from 'react-router-dom';
-import { IonApp, IonRouterOutlet } from '@ionic/react';
-import { IonReactRouter } from '@ionic/react-router';
+import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
+import { Redirect, Route } from 'react-router-dom';
 import 'bootstrap/dist/css/bootstrap.min.css'
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
+
 
 /* Basic CSS for apps built with Ionic */
 import '@ionic/react/css/normalize.css';
@@ -33,20 +33,27 @@ import Auth from './Auth';
 class App extends React.Component {
     render() {
         return (
-            <Router>
-                <Switch>
-                    <Route exact path="/signin" component={SignInOrUp} />
-                    <Route exact path="/signup" component={SignUp} />
-                    {/* 以下認証のみ */}
-                    <Auth>
-                        <Switch>
-                            <Route exact path="/" component={Home} />
-                            {/*<Route exact path="/profile" component={Profile} />*/}
-                            <Route render={() => <p>not found.</p>} />
-                        </Switch>
-                    </Auth>
-                </Switch>
-            </Router>
+            <IonPage>
+                <IonHeader>
+                    <IonToolbar>
+                        <IonTitle>Tab 2</IonTitle>
+                    </IonToolbar>
+                </IonHeader >
+                <Router>
+                    <Switch>
+                        <Route exact path="/signin" component={SignInOrUp} />
+                        <Route exact path="/signup" component={SignUp} />
+                        {/* 以下認証のみ */}
+                        <Auth>
+                            <Switch>
+                                <Route exact path="/" component={Home} />
+                                {/*<Route exact path="/profile" component={Profile} />*/}
+                                <Route render={() => <p>not found.</p>} />
+                            </Switch>
+                        </Auth>
+                    </Switch>
+                </Router>
+            </IonPage >
         );
     }
 }
