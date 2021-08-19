@@ -5,6 +5,8 @@ import { Formik } from 'formik';
 import * as Yup from 'yup';
 import firebase from '../Firebase';
 
+const db = firebase.firestore();
+
 class SignUp extends React.Component {
 
     state = {
@@ -16,28 +18,56 @@ class SignUp extends React.Component {
     //Submitされたら
     handleOnSubmit = (values) => {
         //spinner表示開始
-        if (this._isMounted) this.setState({ loading: true });
+        if (this._isMounted) this.setState({ loading: true })
         //新規登録処理
         firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
-            .then(res => {
+        .then(userCredential => {
+                let flag=false
                 //正常終了時
                 //ついでに名前を設定（これ、登録と一緒にできないのかなあ）
                 firebase.auth().currentUser.updateProfile({
-                    displayName:values.username
-                  }).then(() => {
-                    if (this._isMounted) this.setState({ loading: false });//spinner表示終了
-                    //Homeに移動
-                    this.props.history.push("/"); //history.pushを使うためwithRouterしている
-                  }).catch((error) => {
+                    displayName: values.username
+                }).then(() => {
+                    if(flag){//scoreのDB登録とユーザー名の登録が2つとも終わっていたら
+                        this.props.history.push("/"); //history.pushを使うためwithRouterしている
+                        if (this._isMounted) this.setState({ loading: false });
+                    }else{
+                        flag=true
+                    }
+                }).catch((error) => {
                     if (this._isMounted) this.setState({ loading: false });
                     alert(error);
-                  });  
+                });
+                
+
+                db.collection("scores").doc(userCredential.user.uid).set({
+                    username:values.username,
+                    score:0,
+                })
+                .then(() => {
+                    if(flag){
+                        this.props.history.push("/"); 
+                        if (this._isMounted) this.setState({ loading: false });
+                    }else{
+                        flag=true
+                    }
+                    console.log("Document successfully written!");
+                })
+                .catch((error) => {
+                    alert(error);
+                    if (this._isMounted) this.setState({ loading: false });
+                    console.error(error);
+                });
+
             })
             .catch(error => {
                 //異常終了時
                 if (this._isMounted) this.setState({ loading: false });
                 alert(error);
             });
+        
+
+
     }
 
     componentDidMount = () => {
@@ -54,11 +84,13 @@ class SignUp extends React.Component {
                 <div className="mx-auto" style={{ width: 400, background: '#eee', padding: 20, marginTop: 60 }}>
                     <p style={{ textAlign: 'center' }}>新規登録</p>
                     <Formik
-                        initialValues={{ email: '', password: ''}}
+                        initialValues={{ email: '', password: '' ,username:''}}
                         onSubmit={(values) => this.handleOnSubmit(values)}
                         validationSchema={Yup.object().shape({
                             email: Yup.string().email().required(),
+                            username: Yup.string().required(),
                             password: Yup.string().required(),
+
                         })}
                     >
                         {

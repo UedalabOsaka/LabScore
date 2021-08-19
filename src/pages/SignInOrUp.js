@@ -6,7 +6,6 @@ import * as Yup from 'yup';
 import firebase from '../Firebase';
 
 class SignInOrUp extends React.Component {
-
     state = {
         loading: false, //spinner制御用
     }
