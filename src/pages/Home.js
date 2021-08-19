@@ -32,12 +32,13 @@ class Home extends React.Component {
 
         return (
             <div className="container">
-                <p>Welcome {user.displayName}</p>
-                <p>Your Score is {this.state.score}</p>
-
-                <br />
-                <br />
-                <Button onClick={this.handleLogout}>ログアウト</Button>
+                <div className="mx-auto" style={{ width: 400, background: '#eee', padding: 20, marginTop: 60 }}>
+                    <p>{user.displayName}</p>
+                    <h1>Score : {this.state.score}</h1>
+                    <p style={{ textAlign: 'right'}}>
+                        <a href='' onClick={this.handleLogout}>ログアウト</a>
+                    </p>
+                </div>
             </div>
         );
     }
