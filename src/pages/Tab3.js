@@ -11,7 +11,6 @@ class Tab3 extends React.Component {
                 <div>
                     <a href='' onClick={this.handleLogout}>ログアウト</a>
                 </div>
-
             </div>
         );
     }

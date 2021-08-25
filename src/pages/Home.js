@@ -37,28 +37,10 @@ import '@ionic/react/css/display.css';
 import firebase from '../Firebase';
 
 class Home extends React.Component {
-  state = {
-    score: -1, 
-  }
 
   
   render(){
 
-    const db = firebase.firestore();
-    const user=firebase.auth().currentUser;
-    if (!user){
-        return (<div>Error : no authed user</div>)
-    }
-
-    db.collection("scores").doc(user.uid).get().then((doc) => {
-        if (doc.exists) {
-            this.setState({score:doc.data().score})
-        } else {
-            console.log('Error : document does not exist')
-        }
-    }).catch((error) => {
-        console.log("Error getting document:", error);
-    });
 
     return(
       <IonApp>
