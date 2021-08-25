@@ -42,7 +42,7 @@ class SignUp extends React.Component {
 
                 db.collection("scores").doc(userCredential.user.uid).set({
                     username:values.username,
-                    score:0,
+                    score:20,
                 })
                 .then(() => {
                     if(flag){
