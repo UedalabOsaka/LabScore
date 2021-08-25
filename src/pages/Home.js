@@ -66,7 +66,7 @@ class Home extends React.Component {
         <IonTabs>
           <IonRouterOutlet>
             <Route exact path="/tab1">
-              <Tab1 score={this.state.score} user={user.displayName}/>
+              <Tab1 score={this.state.score} username={user.displayName}/>
             </Route>
             <Route exact path="/tab2">
               <Tab2 user={user} />
