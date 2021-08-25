@@ -33,18 +33,43 @@ import '@ionic/react/css/text-transformation.css';
 import '@ionic/react/css/flex-utils.css';
 import '@ionic/react/css/display.css';
 
+
+import firebase from '../Firebase';
+
 class Home extends React.Component {
+  state = {
+    score: -1, 
+  }
+
+  
   render(){
+
+    const db = firebase.firestore();
+    const user=firebase.auth().currentUser;
+    if (!user){
+        return (<div>Error : no authed user</div>)
+    }
+
+    db.collection("scores").doc(user.uid).get().then((doc) => {
+        if (doc.exists) {
+            this.setState({score:doc.data().score})
+        } else {
+            console.log('Error : document does not exist')
+        }
+    }).catch((error) => {
+        console.log("Error getting document:", error);
+    });
+
     return(
       <IonApp>
       <IonReactRouter>
         <IonTabs>
           <IonRouterOutlet>
             <Route exact path="/tab1">
-              <Tab1 />
+              <Tab1 score={this.state.score} user={user.displayName}/>
             </Route>
             <Route exact path="/tab2">
-              <Tab2 />
+              <Tab2 user={user} />
             </Route>
             <Route path="/tab3">
               <Tab3 />

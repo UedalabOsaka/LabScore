@@ -3,7 +3,6 @@ import React from 'react';
 import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react';
 
 import { Redirect, Route } from 'react-router-dom';
-import 'bootstrap/dist/css/bootstrap.min.css'
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
 
@@ -36,7 +35,7 @@ class App extends React.Component {
             <IonPage>
                 <IonHeader>
                     <IonToolbar>
-                        <IonTitle>Tab 2</IonTitle>
+                        <IonTitle>TItle</IonTitle>
                     </IonToolbar>
                 </IonHeader >
                 <Router>
@@ -46,9 +45,9 @@ class App extends React.Component {
                         {/* 以下認証のみ */}
                         <Auth>
                             <Switch>
-                                <Route exact path="/" component={Home} />
+                                {/*<Route exact path="/" component={Home} />*/}
                                 {/*<Route exact path="/profile" component={Profile} />*/}
-                                <Route render={() => <p>not found.</p>} />
+                                <Route component={Home} />
                             </Switch>
                         </Auth>
                     </Switch>
