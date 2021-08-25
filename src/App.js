@@ -90,11 +90,11 @@ class AuthedContents extends React.Component {
                         <Route exact path="/tab2">
                             <Tab2 friends={this.state.friends} />
                         </Route>
-                        <Route path="/tab3">
+                        <Route exact path="/tab3">
                             <Tab3 />
                         </Route>
                         <Route exact path="/">
-                            <Redirect to="/tab3" />
+                            <Redirect to="/tab1" />
                         </Route>
                     </IonRouterOutlet>
                     <IonTabBar slot="bottom">
