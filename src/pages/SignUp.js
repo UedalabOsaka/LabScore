@@ -78,7 +78,7 @@ class SignUp extends React.Component {
     render() {
         return (
             <div className="container" style={{ textAlign: 'center' }}>
-                <div className="mx-auto" style={{ width: 400, background: '#eee', padding: 20, marginTop: 60 }}>
+                <div className="mx-auto">
                     <h1>Sign Up</h1>
                     <Formik
                         initialValues={{ email: '', password: '', username: '' }}
@@ -93,7 +93,7 @@ class SignUp extends React.Component {
                         {
                             ({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
                                 <Form onSubmit={handleSubmit}>
-                                    <FormGroup>
+                                    <FormGroup style={{margin:'12px'}}>
                                         <Input
                                             placeholder='email'
                                             type="email"
@@ -109,7 +109,7 @@ class SignUp extends React.Component {
                                         </FormFeedback>
                                     </FormGroup>
 
-                                    <FormGroup>
+                                    <FormGroup style={{margin:'12px'}}>
                                         <Input
                                             placeholder='username'
                                             type="username"
@@ -125,7 +125,7 @@ class SignUp extends React.Component {
                                         </FormFeedback>
                                     </FormGroup>
 
-                                    <FormGroup>
+                                    <FormGroup style={{margin:'12px'}}>
                                         <Input
                                             placeholder='password'
                                             type="password"
@@ -140,7 +140,7 @@ class SignUp extends React.Component {
                                             {errors.password}
                                         </FormFeedback>
                                     </FormGroup>
-                                    <div style={{ textAlign: 'center' }}>
+                                    <div style={{ textAlign: 'center',margin:'12px', }}>
                                         <Button color="success" type="submit" disabled={this.state.loading}>
                                             <Spinner size="sm" color="light" style={{ marginRight: 5 }} hidden={!this.state.loading} />
                                             新規登録
@@ -151,7 +151,7 @@ class SignUp extends React.Component {
                         }
                     </Formik>
                 </div>
-                <div className="mx-auto" style={{ width: 400, background: '#fff', padding: 20 }}>
+                <div className="mx-auto" style={{margin:'12px'}}>
                     <Link to="/signin">ログインはこちら。</Link>
                 </div>
 

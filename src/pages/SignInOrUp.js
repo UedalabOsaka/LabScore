@@ -39,8 +39,8 @@ class SignInOrUp extends React.Component {
 
     render() {
         return (
-            <div className="container" style={{ textAlign: 'center' }}>
-                <div className="mx-auto" style={{ width: 400, background: '#eee', padding: 20, marginTop: 60 }}>
+            <div className="container" style={{ textAlign: 'center'}}>
+                <div className="mx-auto">
                     <h1>Log in</h1>
                     <Formik
                         initialValues={{ email: '', password: ''}}
@@ -53,7 +53,7 @@ class SignInOrUp extends React.Component {
                         {
                             ({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
                                 <Form onSubmit={handleSubmit}>
-                                    <FormGroup>
+                                    <FormGroup style={{margin:'12px'}}>
                                         <Input
                                             placeholder="email"
                                             type="email"
@@ -68,7 +68,7 @@ class SignInOrUp extends React.Component {
                                             {errors.email}
                                         </FormFeedback>
                                     </FormGroup>
-                                    <FormGroup>
+                                    <FormGroup style={{margin:'12px'}}>
                                         <Input
                                             placeholder="password"
                                             type="password"
@@ -83,7 +83,7 @@ class SignInOrUp extends React.Component {
                                             {errors.password}
                                         </FormFeedback>
                                     </FormGroup>
-                                    <div style={{ textAlign: 'center' }}>
+                                    <div style={{ textAlign: 'center', margin:'12px',}}>
                                         <Button color="primary" type="submit" disabled={this.state.loading}>
                                             <Spinner size="sm" color="light" style={{ marginRight: 5 }} hidden={!this.state.loading} />
                                             ログイン
