@@ -43,9 +43,10 @@ import Tab1 from './pages/Tab1';
 import Tab2 from './pages/Tab2';
 import Tab3 from './pages/Tab3';
 
-//import Profile from './pages/Profile';
 import SignInOrUp from './pages/SignInOrUp';
 import SignUp from './pages/SignUp';
+
+import SendPoints from './pages/SendPoints'
 
 import Auth from './Auth';
 
@@ -53,7 +54,7 @@ import Auth from './Auth';
 
 class AuthedContents extends React.Component {
     state = {
-        score: -2,
+        score: -1,
         displayName: 'anymous',
         friends:{},
     };
@@ -87,15 +88,21 @@ class AuthedContents extends React.Component {
                         <Route exact path="/tab1">
                             <Tab1 score={this.state.score} username={this.state.displayName} />
                         </Route>
+
+                        <Route path="/send/:id">
+                            <SendPoints friends={this.state.friends} myscore={this.state.score}/>
+                        </Route>
                         <Route exact path="/tab2">
                             <Tab2 friends={this.state.friends} />
                         </Route>
+                        
                         <Route exact path="/tab3">
                             <Tab3 />
                         </Route>
                         <Route exact path="/">
                             <Redirect to="/tab1" />
                         </Route>
+                        
                     </IonRouterOutlet>
                     <IonTabBar slot="bottom">
                         <IonTabButton tab="tab1" href="/tab1">
