@@ -39,9 +39,9 @@ class SignInOrUp extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container" style={{ textAlign: 'center' }}>
                 <div className="mx-auto" style={{ width: 400, background: '#eee', padding: 20, marginTop: 60 }}>
-                    <p style={{ textAlign: 'center' }}>サインイン</p>
+                    <h1>Log in</h1>
                     <Formik
                         initialValues={{ email: '', password: ''}}
                         onSubmit={(values) => this.handleOnSubmit(values)}
@@ -54,8 +54,8 @@ class SignInOrUp extends React.Component {
                             ({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
                                 <Form onSubmit={handleSubmit}>
                                     <FormGroup>
-                                        <Label for="email">Email</Label>
                                         <Input
+                                            placeholder="email"
                                             type="email"
                                             name="email"
                                             id="email"
@@ -69,8 +69,8 @@ class SignInOrUp extends React.Component {
                                         </FormFeedback>
                                     </FormGroup>
                                     <FormGroup>
-                                        <Label for="password">Password</Label>
                                         <Input
+                                            placeholder="password"
                                             type="password"
                                             name="password"
                                             id="password"
@@ -94,7 +94,7 @@ class SignInOrUp extends React.Component {
                         }
                     </Formik>
                 </div>
-                <div className="mx-auto" style={{ width: 400, background: '#fff', padding: 20 }}>
+                <div className="mx-auto">
                     <Link to="/signup">新規登録はこちら。</Link>
                 </div>
             </div>

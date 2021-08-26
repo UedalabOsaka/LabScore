@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Form, FormGroup, Label, Input, FormFeedback, Spinner } from 'reactstrap';
+import { Button, Form, FormGroup, Input, FormFeedback, Spinner } from 'reactstrap';
 import { Link, withRouter } from 'react-router-dom'
 import { Formik } from 'formik';
 import * as Yup from 'yup';
@@ -21,43 +21,43 @@ class SignUp extends React.Component {
         if (this._isMounted) this.setState({ loading: true })
         //新規登録処理
         firebase.auth().createUserWithEmailAndPassword(values.email, values.password)
-        .then(userCredential => {
-                let flag=false
+            .then(userCredential => {
+                let flag = false
                 //正常終了時
                 //ついでに名前を設定（これ、登録と一緒にできないのかなあ）
                 firebase.auth().currentUser.updateProfile({
                     displayName: values.username
                 }).then(() => {
-                    if(flag){//scoreのDB登録とユーザー名の登録が2つとも終わっていたら
+                    if (flag) {//scoreのDB登録とユーザー名の登録が2つとも終わっていたら
                         this.props.history.push("/"); //history.pushを使うためwithRouterしている
                         if (this._isMounted) this.setState({ loading: false });
-                    }else{
-                        flag=true
+                    } else {
+                        flag = true
                     }
                 }).catch((error) => {
                     if (this._isMounted) this.setState({ loading: false });
                     alert(error);
                 });
-                
+
 
                 db.collection("scores").doc(userCredential.user.uid).set({
-                    username:values.username,
-                    score:20,
+                    username: values.username,
+                    score: 20,
                 })
-                .then(() => {
-                    if(flag){
-                        this.props.history.push("/"); 
+                    .then(() => {
+                        if (flag) {
+                            this.props.history.push("/");
+                            if (this._isMounted) this.setState({ loading: false });
+                        } else {
+                            flag = true
+                        }
+                        console.log("Document successfully written!");
+                    })
+                    .catch((error) => {
+                        alert(error);
                         if (this._isMounted) this.setState({ loading: false });
-                    }else{
-                        flag=true
-                    }
-                    console.log("Document successfully written!");
-                })
-                .catch((error) => {
-                    alert(error);
-                    if (this._isMounted) this.setState({ loading: false });
-                    console.error(error);
-                });
+                        console.error(error);
+                    });
 
             })
             .catch(error => {
@@ -77,11 +77,11 @@ class SignUp extends React.Component {
 
     render() {
         return (
-            <div className="container">
+            <div className="container" style={{ textAlign: 'center' }}>
                 <div className="mx-auto" style={{ width: 400, background: '#eee', padding: 20, marginTop: 60 }}>
-                    <p style={{ textAlign: 'center' }}>新規登録</p>
+                    <h1>Sign Up</h1>
                     <Formik
-                        initialValues={{ email: '', password: '' ,username:''}}
+                        initialValues={{ email: '', password: '', username: '' }}
                         onSubmit={(values) => this.handleOnSubmit(values)}
                         validationSchema={Yup.object().shape({
                             email: Yup.string().email().required(),
@@ -94,8 +94,8 @@ class SignUp extends React.Component {
                             ({ handleSubmit, handleChange, handleBlur, values, errors, touched }) => (
                                 <Form onSubmit={handleSubmit}>
                                     <FormGroup>
-                                        <Label for="email">Email</Label>
                                         <Input
+                                            placeholder='email'
                                             type="email"
                                             name="email"
                                             id="email"
@@ -110,8 +110,8 @@ class SignUp extends React.Component {
                                     </FormGroup>
 
                                     <FormGroup>
-                                        <Label for="username">Username</Label>
                                         <Input
+                                            placeholder='username'
                                             type="username"
                                             name="username"
                                             id="username"
@@ -126,8 +126,8 @@ class SignUp extends React.Component {
                                     </FormGroup>
 
                                     <FormGroup>
-                                        <Label for="password">Password</Label>
                                         <Input
+                                            placeholder='password'
                                             type="password"
                                             name="password"
                                             id="password"
