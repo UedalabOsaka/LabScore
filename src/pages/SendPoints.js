@@ -19,12 +19,20 @@ function SendPoints(props) {
 
         state.loading=true
         
-        const giving_score=Number(document.getElementById('score').value)　//だれかいい感じに直してください
+        let giving_score=Number(document.getElementById('score').value)　//だれかいい感じに直してください
         
         const db = firebase.firestore();
         const me = firebase.auth().currentUser;
         if(!me){
             window.alert('try again!')
+            return
+        }
+
+        if(giving_score<0){
+            giving_score*=-1
+        }
+        if (props.myscore-giving_score<0){
+            window.alert(`error: your have only ${props.myscore} points (lower than ${giving_score})`)
             return
         }
 
