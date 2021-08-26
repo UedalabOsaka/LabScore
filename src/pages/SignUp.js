@@ -65,9 +65,6 @@ class SignUp extends React.Component {
                 if (this._isMounted) this.setState({ loading: false });
                 alert(error);
             });
-        
-
-
     }
 
     componentDidMount = () => {

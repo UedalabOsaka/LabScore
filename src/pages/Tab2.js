@@ -1,12 +1,16 @@
-import React from 'react';
+import React,{ useState } from 'react';
 import { IonList, IonItem, IonLabel, IonInput, IonToggle, IonRadio, IonCheckbox, IonItemSliding, IonItemOption, IonItemOptions, IonContent } from '@ionic/react';
+
+import { IonModal, IonButton,  } from '@ionic/react';
+
+
 
 function FriendsList(props) {
     const friends = props.friends;
     console.log(Object.keys(friends).length)
     if (Object.keys(friends).length) {
         const friendsItems = Object.keys(friends).map((id) =>
-            <IonItem key={id} onClick={() => window.alert('工事中です！')} detail>
+            <IonItem key={id} routerLink={`/send/${id}`} detail>
                 <IonLabel>{friends[id].username}({friends[id].score})</IonLabel>
             </IonItem>
         );
