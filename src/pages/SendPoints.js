@@ -13,8 +13,11 @@ function SendPoints(props) {
     let state={
         loading:false
     }
+
     function handleSubmit(e){
         e.preventDefault();
+
+        state.loading=true
         
         const giving_score=Number(document.getElementById('score').value)　//だれかいい感じに直してください
         
@@ -35,6 +38,7 @@ function SendPoints(props) {
             },{ merge: true })
             .then(() => {
                 window.alert('success!')
+                state.loading=false
             })
             .catch((error) => {
                 window.alert(error)
