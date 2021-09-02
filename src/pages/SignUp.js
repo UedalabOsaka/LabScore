@@ -141,7 +141,7 @@ class SignUp extends React.Component {
                                         </FormFeedback>
                                     </FormGroup>
                                     <div style={{ textAlign: 'center',margin:'12px', }}>
-                                        <Button color="success" type="submit" disabled={this.state.loading}>
+                                    <Button type="submit" disabled={this.state.loading} style={{width:'230px',height:'40px',background:'#004E98',color:'white',fontSize:'1.2rem'}}>
                                             <Spinner size="sm" color="light" style={{ marginRight: 5 }} hidden={!this.state.loading} />
                                             新規登録
                                         </Button>
